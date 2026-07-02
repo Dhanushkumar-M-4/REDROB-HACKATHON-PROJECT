@@ -53,12 +53,13 @@ async def health_check():
 async def rank_candidates(
     job_description: Optional[str] = Form(None),
     file: Optional[UploadFile] = File(None),
+    candidates_file: Optional[UploadFile] = File(None),
 ):
     """Rank candidates against a job description.
 
-    Accepts either:
-    - A `job_description` form field with raw text
-    - A `file` upload (TXT, PDF, DOCX)
+    Accepts:
+    - A `job_description` form field with raw text OR a `file` upload (TXT, PDF, DOCX)
+    - An optional `candidates_file` upload (CSV, JSON) to rank custom candidates.
 
     Returns ranked candidates with hybrid scores.
     """
@@ -93,7 +94,7 @@ async def rank_candidates(
         except Exception as e:
             raise HTTPException(
                 status_code=400,
-                detail=f"Failed to read uploaded file: {e}",
+                detail=f"Failed to read uploaded JD file: {e}",
             )
 
     elif job_description is not None:
@@ -105,37 +106,55 @@ async def rank_candidates(
             detail="No job description provided. Send 'job_description' form field or upload a file.",
         )
 
-    # Ensure candidates are loaded
-    if not pipeline.candidates:
+    # Save candidates file temporarily if uploaded
+    candidates_path = None
+    if candidates_file is not None:
+        logger.info("Received candidates file upload │ filename={}", candidates_file.filename)
         try:
-            logger.info("Loading candidates for ranking...")
-            pipeline.run(
+            content = await candidates_file.read()
+            import tempfile
+            from pathlib import Path
+
+            suffix = Path(candidates_file.filename).suffix if candidates_file.filename else ".csv"
+            with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+                tmp.write(content)
+                candidates_path = tmp.name
+        except Exception as e:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Failed to read uploaded candidates file: {e}",
+            )
+
+    try:
+        if candidates_path or not pipeline.candidates:
+            logger.info("Running pipeline with candidates_source={}", candidates_path)
+            result = pipeline.run(
                 jd_source=jd_text,
+                candidates_source=candidates_path,
                 export_csv=True,
                 export_json=True,
                 display_table=False,
             )
-        except Exception as e:
-            raise HTTPException(
-                status_code=500,
-                detail=f"Pipeline execution failed: {e}",
-            )
-    else:
-        try:
+        else:
             result = pipeline.rank_with_jd_text(
                 jd_text=jd_text,
                 export_csv=True,
                 display_table=False,
             )
-            return result
-        except Exception as e:
-            raise HTTPException(
-                status_code=500,
-                detail=f"Ranking failed: {e}",
-            )
-
-    if pipeline.latest_result:
-        return pipeline.latest_result
+        return result
+    except Exception as e:
+        logger.exception("Ranking failed")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Ranking execution failed: {e}",
+        )
+    finally:
+        if candidates_path:
+            try:
+                from pathlib import Path
+                Path(candidates_path).unlink(missing_ok=True)
+            except Exception as e:
+                logger.error("Failed to delete temp candidates file: {}", e)
 
     raise HTTPException(status_code=500, detail="No ranking results available")
 

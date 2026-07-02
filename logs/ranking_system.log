@@ -22,3 +22,336 @@
 2026-07-02 15:46:01.335 │ INFO     │ pipeline:run:131 │ Candidates loaded │ total=20
 2026-07-02 15:46:01.336 │ INFO     │ pipeline:run:139 │ Step 3/7 │ Generating embeddings and building FAISS index
 2026-07-02 15:46:58.128 │ INFO     │ embedding_service:_load_model:56 │ Loading primary embedding model: BAAI/bge-large-en-v1.5
+2026-07-02 16:13:35.733 │ INFO     │ logging:setup_logging:64 │ Logging initialized │ level=INFO │ file=D:\New folder\REDROB-HACKATHON-PROJECT\logs\ranking_system.log
+2026-07-02 16:13:35.734 │ INFO     │ run:main:110 │ Starting AI Smart Candidate Ranking System
+2026-07-02 16:13:35.735 │ INFO     │ run:main:111 │ Project root: D:\New folder\REDROB-HACKATHON-PROJECT
+2026-07-02 16:13:52.086 │ INFO     │ pipeline:__init__:71 │ RankingPipeline initialized
+2026-07-02 16:13:52.090 │ INFO     │ pipeline:run:107 │ ============================================================
+2026-07-02 16:13:52.090 │ INFO     │ pipeline:run:108 │ STARTING RANKING PIPELINE
+2026-07-02 16:13:52.091 │ INFO     │ pipeline:run:109 │ ============================================================
+2026-07-02 16:13:52.117 │ INFO     │ pipeline:run:114 │ Step 1/7 │ Parsing job description
+2026-07-02 16:13:52.120 │ INFO     │ pipeline:_load_job_description:254 │ Auto-detected JD file: D:\New folder\REDROB-HACKATHON-PROJECT\data\job_descriptions\sample_jd.txt
+2026-07-02 16:13:52.127 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_jd.txt │ format=.txt
+2026-07-02 16:13:52.162 │ INFO     │ jd_parser:parse:46 │ Parsing job description │ length=1453 chars
+2026-07-02 16:13:53.732 │ INFO     │ jd_parser:_extract_with_llm:68 │ Sending JD to LLM for requirement extraction │ model=llama3
+2026-07-02 16:15:59.999 │ INFO     │ jd_parser:_extract_with_llm:90 │ LLM extracted │ role=Senior Machine Learning Engineer │ skills=7
+2026-07-02 16:16:00.008 │ INFO     │ pipeline:run:118 │ JD parsed │ role=Senior Machine Learning Engineer │ required_skills=7 │ exp=5.0-10.0 years
+2026-07-02 16:16:00.016 │ INFO     │ pipeline:run:128 │ Step 2/7 │ Parsing candidate data
+2026-07-02 16:16:00.021 │ INFO     │ pipeline:_load_candidates:264 │ Loading candidates from default directory: D:\New folder\REDROB-HACKATHON-PROJECT\data\candidates
+2026-07-02 16:16:00.024 │ INFO     │ candidate_parser:parse_file:51 │ Parsing candidate file │ path=sample_candidates.csv
+2026-07-02 16:16:00.025 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_candidates.csv │ format=.csv
+2026-07-02 16:16:00.139 │ INFO     │ candidate_parser:parse_file:68 │ Parsed 20 candidates from sample_candidates.csv
+2026-07-02 16:16:00.140 │ INFO     │ candidate_parser:parse_directory:100 │ Total candidates parsed from directory: 20
+2026-07-02 16:16:00.140 │ INFO     │ pipeline:run:131 │ Candidates loaded │ total=20
+2026-07-02 16:16:00.142 │ INFO     │ pipeline:run:139 │ Step 3/7 │ Generating embeddings and building FAISS index
+2026-07-02 16:16:32.859 │ INFO     │ embedding_service:_load_model:56 │ Loading primary embedding model: BAAI/bge-large-en-v1.5
+2026-07-02 16:18:17.571 │ INFO     │ embedding_service:_load_model:61 │ Primary model loaded │ model=BAAI/bge-large-en-v1.5 │ dimension=1024
+2026-07-02 16:18:17.573 │ INFO     │ semantic_ranker:build_index:34 │ Building FAISS index for 20 candidates
+2026-07-02 16:18:17.574 │ INFO     │ embedding_service:encode:111 │ Encoding 20 texts │ model=BAAI/bge-large-en-v1.5
+2026-07-02 16:18:26.241 │ INFO     │ vector_store:build:79 │ FAISS index built │ vectors=20 │ dimension=1024
+2026-07-02 16:18:26.242 │ INFO     │ semantic_ranker:build_index:46 │ FAISS index ready │ vectors=20
+2026-07-02 16:18:26.249 │ INFO     │ vector_store:save:143 │ FAISS index saved │ path=D:\New folder\REDROB-HACKATHON-PROJECT\vector_db\candidate_index.faiss │ vectors=20
+2026-07-02 16:18:26.251 │ INFO     │ pipeline:run:148 │ Step 4/7 │ Running semantic search (top 30)
+2026-07-02 16:18:26.252 │ INFO     │ semantic_ranker:search:64 │ Encoding JD query for semantic search │ top_k=30
+2026-07-02 16:18:26.959 │ INFO     │ vector_store:search:125 │ FAISS search │ top_k=30 │ results=20
+2026-07-02 16:18:26.960 │ INFO     │ semantic_ranker:search:71 │ Semantic search complete │ results=20 │ top_score=81.24 │ min_score=61.56
+2026-07-02 16:18:26.961 │ INFO     │ pipeline:run:153 │ Semantic search retrieved 20 candidates
+2026-07-02 16:18:26.963 │ INFO     │ pipeline:run:160 │ Step 5/7 │ LLM re-ranking (20 candidates)
+2026-07-02 16:18:26.990 │ INFO     │ llm_ranker:_check_availability:78 │ Ollama available │ model=llama3
+2026-07-02 16:18:26.991 │ INFO     │ llm_ranker:evaluate_batch:182 │ LLM batch evaluation │ candidates=20
+2026-07-02 16:19:23.094 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-003 │ score=61.3/100
+2026-07-02 16:19:53.938 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-002 │ score=61.3/100
+2026-07-02 16:20:25.566 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-001 │ score=85.0/100
+2026-07-02 16:20:53.243 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-004 │ score=26.2/100
+2026-07-02 16:21:27.698 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-005 │ score=76.2/100
+2026-07-02 16:21:57.939 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-006 │ score=67.5/100
+2026-07-02 16:22:27.962 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-007 │ score=26.2/100
+2026-07-02 16:23:01.958 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-008 │ score=86.2/100
+2026-07-02 16:24:03.042 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-010 │ score=38.8/100
+2026-07-02 16:24:33.632 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-011 │ score=77.5/100
+2026-07-02 16:25:39.101 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-012 │ score=81.2/100
+2026-07-02 16:26:07.594 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-013 │ score=65.0/100
+2026-07-02 16:26:39.918 │ ERROR    │ llm_ranker:evaluate_candidate:165 │ LLM evaluation exhausted retries for CAND-009
+2026-07-02 16:27:09.335 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-014 │ score=41.2/100
+2026-07-02 16:27:37.764 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-015 │ score=26.2/100
+2026-07-02 16:28:09.421 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-016 │ score=51.2/100
+2026-07-02 16:28:38.353 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-017 │ score=68.8/100
+2026-07-02 16:29:10.735 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-018 │ score=50.0/100
+2026-07-02 16:29:42.688 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-019 │ score=51.2/100
+2026-07-02 17:06:12.464 │ INFO     │ logging:setup_logging:64 │ Logging initialized │ level=INFO │ file=D:\New folder\REDROB-HACKATHON-PROJECT\logs\ranking_system.log
+2026-07-02 17:06:12.465 │ INFO     │ run:main:110 │ Starting AI Smart Candidate Ranking System
+2026-07-02 17:06:12.465 │ INFO     │ run:main:111 │ Project root: D:\New folder\REDROB-HACKATHON-PROJECT
+2026-07-02 17:06:16.674 │ INFO     │ pipeline:__init__:71 │ RankingPipeline initialized
+2026-07-02 17:06:16.674 │ INFO     │ pipeline:run:107 │ ============================================================
+2026-07-02 17:06:16.674 │ INFO     │ pipeline:run:108 │ STARTING RANKING PIPELINE
+2026-07-02 17:06:16.674 │ INFO     │ pipeline:run:109 │ ============================================================
+2026-07-02 17:06:16.682 │ INFO     │ pipeline:run:114 │ Step 1/7 │ Parsing job description
+2026-07-02 17:06:16.684 │ INFO     │ pipeline:_load_job_description:254 │ Auto-detected JD file: D:\New folder\REDROB-HACKATHON-PROJECT\data\job_descriptions\sample_jd.txt
+2026-07-02 17:06:16.684 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_jd.txt │ format=.txt
+2026-07-02 17:06:16.687 │ INFO     │ jd_parser:parse:46 │ Parsing job description │ length=1453 chars
+2026-07-02 17:06:17.167 │ INFO     │ jd_parser:_extract_with_llm:68 │ Sending JD to LLM for requirement extraction │ model=llama3
+2026-07-02 17:07:37.998 │ INFO     │ jd_parser:_extract_with_llm:90 │ LLM extracted │ role=Senior Machine Learning Engineer │ skills=7
+2026-07-02 17:07:38.003 │ INFO     │ pipeline:run:118 │ JD parsed │ role=Senior Machine Learning Engineer │ required_skills=7 │ exp=5.0-10.0 years
+2026-07-02 17:07:38.008 │ INFO     │ pipeline:run:128 │ Step 2/7 │ Parsing candidate data
+2026-07-02 17:07:38.013 │ INFO     │ pipeline:_load_candidates:264 │ Loading candidates from default directory: D:\New folder\REDROB-HACKATHON-PROJECT\data\candidates
+2026-07-02 17:07:38.014 │ INFO     │ candidate_parser:parse_file:51 │ Parsing candidate file │ path=sample_candidates.csv
+2026-07-02 17:07:38.015 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_candidates.csv │ format=.csv
+2026-07-02 17:07:38.104 │ INFO     │ candidate_parser:parse_file:68 │ Parsed 20 candidates from sample_candidates.csv
+2026-07-02 17:07:38.104 │ INFO     │ candidate_parser:parse_directory:100 │ Total candidates parsed from directory: 20
+2026-07-02 17:07:38.105 │ INFO     │ pipeline:run:131 │ Candidates loaded │ total=20
+2026-07-02 17:07:38.107 │ INFO     │ pipeline:run:139 │ Step 3/7 │ Generating embeddings and building FAISS index
+2026-07-02 17:08:40.371 │ INFO     │ embedding_service:_load_model:56 │ Loading primary embedding model: BAAI/bge-large-en-v1.5
+2026-07-02 17:08:48.046 │ INFO     │ embedding_service:_load_model:61 │ Primary model loaded │ model=BAAI/bge-large-en-v1.5 │ dimension=1024
+2026-07-02 17:08:48.047 │ INFO     │ semantic_ranker:build_index:34 │ Building FAISS index for 20 candidates
+2026-07-02 17:08:48.048 │ INFO     │ embedding_service:encode:111 │ Encoding 20 texts │ model=BAAI/bge-large-en-v1.5
+2026-07-02 17:08:55.839 │ INFO     │ vector_store:build:79 │ FAISS index built │ vectors=20 │ dimension=1024
+2026-07-02 17:08:55.840 │ INFO     │ semantic_ranker:build_index:46 │ FAISS index ready │ vectors=20
+2026-07-02 17:08:55.845 │ INFO     │ vector_store:save:143 │ FAISS index saved │ path=D:\New folder\REDROB-HACKATHON-PROJECT\vector_db\candidate_index.faiss │ vectors=20
+2026-07-02 17:08:55.847 │ INFO     │ pipeline:run:148 │ Step 4/7 │ Running semantic search (top 5)
+2026-07-02 17:08:55.849 │ INFO     │ semantic_ranker:search:64 │ Encoding JD query for semantic search │ top_k=5
+2026-07-02 17:08:56.538 │ INFO     │ vector_store:search:125 │ FAISS search │ top_k=5 │ results=5
+2026-07-02 17:08:56.539 │ INFO     │ semantic_ranker:search:71 │ Semantic search complete │ results=5 │ top_score=81.24 │ min_score=72.90
+2026-07-02 17:08:56.539 │ INFO     │ pipeline:run:153 │ Semantic search retrieved 5 candidates
+2026-07-02 17:08:56.542 │ INFO     │ pipeline:run:160 │ Step 5/7 │ LLM re-ranking (5 candidates)
+2026-07-02 17:08:56.554 │ INFO     │ llm_ranker:_check_availability:78 │ Ollama available │ model=llama3
+2026-07-02 17:08:56.554 │ INFO     │ llm_ranker:evaluate_batch:182 │ LLM batch evaluation │ candidates=5
+2026-07-02 17:09:51.547 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-001 │ score=85.0/100
+2026-07-02 17:10:48.105 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-003 │ score=61.3/100
+2026-07-02 17:12:17.039 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-016 │ score=43.8/100
+2026-07-02 17:13:13.603 │ ERROR    │ llm_ranker:evaluate_candidate:165 │ LLM evaluation exhausted retries for CAND-011
+2026-07-02 17:13:43.767 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-012 │ score=81.2/100
+2026-07-02 17:13:43.772 │ INFO     │ pipeline:run:176 │ Step 6/7 │ Computing hybrid scores
+2026-07-02 17:13:43.775 │ INFO     │ hybrid_scorer:compute_scores:63 │ Computing hybrid scores for 5 candidates
+2026-07-02 17:13:43.779 │ INFO     │ hybrid_scorer:compute_scores:132 │ Hybrid scoring complete │ top=Arjun Mehta (80.58) │ bottom=Omar Hassan (53.04)
+2026-07-02 17:13:43.781 │ INFO     │ pipeline:run:185 │ Step 7/7 │ Exporting results
+2026-07-02 17:13:43.866 │ INFO     │ export_service:export_csv:63 │ CSV exported │ path=D:\New folder\REDROB-HACKATHON-PROJECT\data\output\ranked_candidates.csv │ rows=5
+2026-07-02 17:13:43.873 │ INFO     │ export_service:export_json:85 │ JSON exported │ path=D:\New folder\REDROB-HACKATHON-PROJECT\data\output\ranked_candidates.json
+2026-07-02 17:13:43.914 │ INFO     │ pipeline:run:208 │ ============================================================
+2026-07-02 17:13:43.914 │ INFO     │ pipeline:run:209 │ PIPELINE COMPLETE │ ranked 5 candidates
+2026-07-02 17:13:43.915 │ INFO     │ pipeline:run:210 │ ============================================================
+2026-07-02 17:13:44.663 │ INFO     │ main:lifespan:34 │ FastAPI starting up │ 0.0.0.0:8000
+2026-07-02 17:13:44.664 │ INFO     │ main:lifespan:37 │ FastAPI shutting down
+2026-07-02 17:15:46.475 │ INFO     │ logging:setup_logging:64 │ Logging initialized │ level=INFO │ file=D:\New folder\REDROB-HACKATHON-PROJECT\logs\ranking_system.log
+2026-07-02 17:15:46.475 │ INFO     │ run:main:110 │ Starting AI Smart Candidate Ranking System
+2026-07-02 17:15:46.476 │ INFO     │ run:main:111 │ Project root: D:\New folder\REDROB-HACKATHON-PROJECT
+2026-07-02 17:15:47.481 │ INFO     │ pipeline:__init__:71 │ RankingPipeline initialized
+2026-07-02 17:15:47.481 │ INFO     │ pipeline:run:107 │ ============================================================
+2026-07-02 17:15:47.481 │ INFO     │ pipeline:run:108 │ STARTING RANKING PIPELINE
+2026-07-02 17:15:47.482 │ INFO     │ pipeline:run:109 │ ============================================================
+2026-07-02 17:15:47.488 │ INFO     │ pipeline:run:114 │ Step 1/7 │ Parsing job description
+2026-07-02 17:15:47.490 │ INFO     │ pipeline:_load_job_description:254 │ Auto-detected JD file: D:\New folder\REDROB-HACKATHON-PROJECT\data\job_descriptions\sample_jd.txt
+2026-07-02 17:15:47.490 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_jd.txt │ format=.txt
+2026-07-02 17:15:47.491 │ INFO     │ jd_parser:parse:46 │ Parsing job description │ length=1453 chars
+2026-07-02 17:15:47.846 │ INFO     │ jd_parser:_extract_with_llm:68 │ Sending JD to LLM for requirement extraction │ model=llama3
+2026-07-02 17:16:39.504 │ INFO     │ jd_parser:_extract_with_llm:90 │ LLM extracted │ role=Senior Machine Learning Engineer │ skills=7
+2026-07-02 17:16:39.505 │ INFO     │ pipeline:run:118 │ JD parsed │ role=Senior Machine Learning Engineer │ required_skills=7 │ exp=5.0-10.0 years
+2026-07-02 17:16:39.507 │ INFO     │ pipeline:run:128 │ Step 2/7 │ Parsing candidate data
+2026-07-02 17:16:39.509 │ INFO     │ pipeline:_load_candidates:264 │ Loading candidates from default directory: D:\New folder\REDROB-HACKATHON-PROJECT\data\candidates
+2026-07-02 17:16:39.511 │ INFO     │ candidate_parser:parse_file:51 │ Parsing candidate file │ path=sample_candidates.csv
+2026-07-02 17:16:39.512 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_candidates.csv │ format=.csv
+2026-07-02 17:16:39.554 │ INFO     │ candidate_parser:parse_file:68 │ Parsed 20 candidates from sample_candidates.csv
+2026-07-02 17:16:39.555 │ INFO     │ candidate_parser:parse_directory:100 │ Total candidates parsed from directory: 20
+2026-07-02 17:16:39.556 │ INFO     │ pipeline:run:131 │ Candidates loaded │ total=20
+2026-07-02 17:16:39.558 │ INFO     │ pipeline:run:139 │ Step 3/7 │ Generating embeddings and building FAISS index
+2026-07-02 17:17:01.680 │ INFO     │ embedding_service:_load_model:56 │ Loading primary embedding model: BAAI/bge-large-en-v1.5
+2026-07-02 17:17:11.493 │ INFO     │ embedding_service:_load_model:61 │ Primary model loaded │ model=BAAI/bge-large-en-v1.5 │ dimension=1024
+2026-07-02 17:17:11.499 │ INFO     │ semantic_ranker:build_index:34 │ Building FAISS index for 20 candidates
+2026-07-02 17:17:11.500 │ INFO     │ embedding_service:encode:111 │ Encoding 20 texts │ model=BAAI/bge-large-en-v1.5
+2026-07-02 17:17:26.078 │ INFO     │ vector_store:build:79 │ FAISS index built │ vectors=20 │ dimension=1024
+2026-07-02 17:17:26.079 │ INFO     │ semantic_ranker:build_index:46 │ FAISS index ready │ vectors=20
+2026-07-02 17:17:26.095 │ INFO     │ vector_store:save:143 │ FAISS index saved │ path=D:\New folder\REDROB-HACKATHON-PROJECT\vector_db\candidate_index.faiss │ vectors=20
+2026-07-02 17:17:26.122 │ INFO     │ pipeline:run:148 │ Step 4/7 │ Running semantic search (top 5)
+2026-07-02 17:17:26.131 │ INFO     │ semantic_ranker:search:64 │ Encoding JD query for semantic search │ top_k=5
+2026-07-02 17:17:27.479 │ INFO     │ vector_store:search:125 │ FAISS search │ top_k=5 │ results=5
+2026-07-02 17:17:27.480 │ INFO     │ semantic_ranker:search:71 │ Semantic search complete │ results=5 │ top_score=81.24 │ min_score=72.90
+2026-07-02 17:17:27.481 │ INFO     │ pipeline:run:153 │ Semantic search retrieved 5 candidates
+2026-07-02 17:17:27.484 │ INFO     │ pipeline:run:160 │ Step 5/7 │ LLM re-ranking (5 candidates)
+2026-07-02 17:17:27.533 │ INFO     │ llm_ranker:_check_availability:78 │ Ollama available │ model=llama3
+2026-07-02 17:17:27.533 │ INFO     │ llm_ranker:evaluate_batch:182 │ LLM batch evaluation │ candidates=5
+2026-07-02 17:17:56.481 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-003 │ score=61.3/100
+2026-07-02 17:18:28.760 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-001 │ score=85.0/100
+2026-07-02 17:20:06.285 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-016 │ score=51.2/100
+2026-07-02 17:21:39.281 │ ERROR    │ llm_ranker:evaluate_candidate:165 │ LLM evaluation exhausted retries for CAND-011
+2026-07-02 17:22:09.137 │ ERROR    │ llm_ranker:evaluate_candidate:165 │ LLM evaluation exhausted retries for CAND-012
+2026-07-02 17:22:09.149 │ INFO     │ pipeline:run:176 │ Step 6/7 │ Computing hybrid scores
+2026-07-02 17:22:09.157 │ INFO     │ hybrid_scorer:compute_scores:63 │ Computing hybrid scores for 5 candidates
+2026-07-02 17:22:09.173 │ INFO     │ hybrid_scorer:compute_scores:132 │ Hybrid scoring complete │ top=Arjun Mehta (80.58) │ bottom=Katie O'Brien (50.57)
+2026-07-02 17:22:09.175 │ INFO     │ pipeline:run:185 │ Step 7/7 │ Exporting results
+2026-07-02 17:22:09.433 │ INFO     │ export_service:export_csv:63 │ CSV exported │ path=D:\New folder\REDROB-HACKATHON-PROJECT\data\output\ranked_candidates.csv │ rows=5
+2026-07-02 17:22:09.442 │ INFO     │ export_service:export_json:85 │ JSON exported │ path=D:\New folder\REDROB-HACKATHON-PROJECT\data\output\ranked_candidates.json
+2026-07-02 17:22:09.546 │ INFO     │ pipeline:run:208 │ ============================================================
+2026-07-02 17:22:09.550 │ INFO     │ pipeline:run:209 │ PIPELINE COMPLETE │ ranked 5 candidates
+2026-07-02 17:22:09.553 │ INFO     │ pipeline:run:210 │ ============================================================
+2026-07-02 17:22:11.222 │ INFO     │ main:lifespan:35 │ FastAPI starting up │ 0.0.0.0:8000
+2026-07-02 17:22:11.226 │ INFO     │ main:lifespan:38 │ FastAPI shutting down
+2026-07-02 17:22:52.147 │ INFO     │ logging:setup_logging:64 │ Logging initialized │ level=INFO │ file=D:\New folder\REDROB-HACKATHON-PROJECT\logs\ranking_system.log
+2026-07-02 17:22:52.148 │ INFO     │ run:main:110 │ Starting AI Smart Candidate Ranking System
+2026-07-02 17:22:52.148 │ INFO     │ run:main:111 │ Project root: D:\New folder\REDROB-HACKATHON-PROJECT
+2026-07-02 17:22:52.989 │ INFO     │ pipeline:__init__:71 │ RankingPipeline initialized
+2026-07-02 17:22:52.990 │ INFO     │ pipeline:run:107 │ ============================================================
+2026-07-02 17:22:52.990 │ INFO     │ pipeline:run:108 │ STARTING RANKING PIPELINE
+2026-07-02 17:22:52.990 │ INFO     │ pipeline:run:109 │ ============================================================
+2026-07-02 17:22:52.997 │ INFO     │ pipeline:run:114 │ Step 1/7 │ Parsing job description
+2026-07-02 17:22:53.000 │ INFO     │ pipeline:_load_job_description:254 │ Auto-detected JD file: D:\New folder\REDROB-HACKATHON-PROJECT\data\job_descriptions\sample_jd.txt
+2026-07-02 17:22:53.001 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_jd.txt │ format=.txt
+2026-07-02 17:22:53.002 │ INFO     │ jd_parser:parse:46 │ Parsing job description │ length=1453 chars
+2026-07-02 17:22:53.339 │ INFO     │ jd_parser:_extract_with_llm:68 │ Sending JD to LLM for requirement extraction │ model=llama3
+2026-07-02 17:23:44.027 │ INFO     │ jd_parser:_extract_with_llm:90 │ LLM extracted │ role=Senior Machine Learning Engineer │ skills=7
+2026-07-02 17:23:44.028 │ INFO     │ pipeline:run:118 │ JD parsed │ role=Senior Machine Learning Engineer │ required_skills=7 │ exp=5.0-10.0 years
+2026-07-02 17:23:44.031 │ INFO     │ pipeline:run:128 │ Step 2/7 │ Parsing candidate data
+2026-07-02 17:23:44.033 │ INFO     │ pipeline:_load_candidates:264 │ Loading candidates from default directory: D:\New folder\REDROB-HACKATHON-PROJECT\data\candidates
+2026-07-02 17:23:44.035 │ INFO     │ candidate_parser:parse_file:51 │ Parsing candidate file │ path=sample_candidates.csv
+2026-07-02 17:23:44.035 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_candidates.csv │ format=.csv
+2026-07-02 17:23:44.066 │ INFO     │ candidate_parser:parse_file:68 │ Parsed 20 candidates from sample_candidates.csv
+2026-07-02 17:23:44.067 │ INFO     │ candidate_parser:parse_directory:100 │ Total candidates parsed from directory: 20
+2026-07-02 17:23:44.068 │ INFO     │ pipeline:run:131 │ Candidates loaded │ total=20
+2026-07-02 17:23:44.069 │ INFO     │ pipeline:run:139 │ Step 3/7 │ Generating embeddings and building FAISS index
+2026-07-02 17:24:07.056 │ INFO     │ embedding_service:_load_model:56 │ Loading primary embedding model: BAAI/bge-large-en-v1.5
+2026-07-02 17:24:16.276 │ INFO     │ embedding_service:_load_model:61 │ Primary model loaded │ model=BAAI/bge-large-en-v1.5 │ dimension=1024
+2026-07-02 17:24:16.285 │ INFO     │ semantic_ranker:build_index:34 │ Building FAISS index for 20 candidates
+2026-07-02 17:24:16.286 │ INFO     │ embedding_service:encode:111 │ Encoding 20 texts │ model=BAAI/bge-large-en-v1.5
+2026-07-02 17:24:36.838 │ INFO     │ vector_store:build:79 │ FAISS index built │ vectors=20 │ dimension=1024
+2026-07-02 17:24:36.844 │ INFO     │ semantic_ranker:build_index:46 │ FAISS index ready │ vectors=20
+2026-07-02 17:24:36.868 │ INFO     │ vector_store:save:143 │ FAISS index saved │ path=D:\New folder\REDROB-HACKATHON-PROJECT\vector_db\candidate_index.faiss │ vectors=20
+2026-07-02 17:24:36.953 │ INFO     │ pipeline:run:148 │ Step 4/7 │ Running semantic search (top 5)
+2026-07-02 17:24:36.968 │ INFO     │ semantic_ranker:search:64 │ Encoding JD query for semantic search │ top_k=5
+2026-07-02 17:24:38.761 │ INFO     │ vector_store:search:125 │ FAISS search │ top_k=5 │ results=5
+2026-07-02 17:24:38.762 │ INFO     │ semantic_ranker:search:71 │ Semantic search complete │ results=5 │ top_score=81.24 │ min_score=72.90
+2026-07-02 17:24:38.763 │ INFO     │ pipeline:run:153 │ Semantic search retrieved 5 candidates
+2026-07-02 17:24:38.767 │ INFO     │ pipeline:run:160 │ Step 5/7 │ LLM re-ranking (5 candidates)
+2026-07-02 17:24:38.820 │ INFO     │ llm_ranker:_check_availability:78 │ Ollama available │ model=llama3
+2026-07-02 17:24:38.821 │ INFO     │ llm_ranker:evaluate_batch:182 │ LLM batch evaluation │ candidates=5
+2026-07-02 17:25:49.159 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-003 │ score=75.0/100
+2026-07-02 17:26:21.297 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-001 │ score=85.0/100
+2026-07-02 17:27:25.752 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-012 │ score=68.8/100
+2026-07-02 17:27:57.132 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-016 │ score=62.5/100
+2026-07-02 17:28:26.342 │ ERROR    │ llm_ranker:evaluate_candidate:165 │ LLM evaluation exhausted retries for CAND-011
+2026-07-02 17:28:26.355 │ INFO     │ pipeline:run:176 │ Step 6/7 │ Computing hybrid scores
+2026-07-02 17:28:26.362 │ INFO     │ hybrid_scorer:compute_scores:63 │ Computing hybrid scores for 5 candidates
+2026-07-02 17:28:26.371 │ INFO     │ hybrid_scorer:compute_scores:132 │ Hybrid scoring complete │ top=Arjun Mehta (80.58) │ bottom=Omar Hassan (53.04)
+2026-07-02 17:28:26.372 │ INFO     │ pipeline:run:185 │ Step 7/7 │ Exporting results
+2026-07-02 17:28:26.550 │ INFO     │ export_service:export_csv:63 │ CSV exported │ path=D:\New folder\REDROB-HACKATHON-PROJECT\data\output\ranked_candidates.csv │ rows=5
+2026-07-02 17:28:26.554 │ INFO     │ export_service:export_json:85 │ JSON exported │ path=D:\New folder\REDROB-HACKATHON-PROJECT\data\output\ranked_candidates.json
+2026-07-02 17:28:26.601 │ INFO     │ pipeline:run:208 │ ============================================================
+2026-07-02 17:28:26.602 │ INFO     │ pipeline:run:209 │ PIPELINE COMPLETE │ ranked 5 candidates
+2026-07-02 17:28:26.603 │ INFO     │ pipeline:run:210 │ ============================================================
+2026-07-02 17:28:27.193 │ INFO     │ main:lifespan:35 │ FastAPI starting up │ 0.0.0.0:8000
+2026-07-02 17:28:27.195 │ INFO     │ main:lifespan:38 │ FastAPI shutting down
+2026-07-02 17:31:18.011 │ INFO     │ logging:setup_logging:64 │ Logging initialized │ level=INFO │ file=D:\New folder\REDROB-HACKATHON-PROJECT\logs\ranking_system.log
+2026-07-02 17:31:18.012 │ INFO     │ run:main:110 │ Starting AI Smart Candidate Ranking System
+2026-07-02 17:31:18.012 │ INFO     │ run:main:111 │ Project root: D:\New folder\REDROB-HACKATHON-PROJECT
+2026-07-02 17:31:18.914 │ INFO     │ pipeline:__init__:71 │ RankingPipeline initialized
+2026-07-02 17:31:18.914 │ INFO     │ pipeline:run:107 │ ============================================================
+2026-07-02 17:31:18.914 │ INFO     │ pipeline:run:108 │ STARTING RANKING PIPELINE
+2026-07-02 17:31:18.915 │ INFO     │ pipeline:run:109 │ ============================================================
+2026-07-02 17:31:18.921 │ INFO     │ pipeline:run:114 │ Step 1/7 │ Parsing job description
+2026-07-02 17:31:18.923 │ INFO     │ pipeline:_load_job_description:254 │ Auto-detected JD file: D:\New folder\REDROB-HACKATHON-PROJECT\data\job_descriptions\sample_jd.txt
+2026-07-02 17:31:18.924 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_jd.txt │ format=.txt
+2026-07-02 17:31:18.924 │ INFO     │ jd_parser:parse:46 │ Parsing job description │ length=1453 chars
+2026-07-02 17:31:19.276 │ INFO     │ jd_parser:_extract_with_llm:68 │ Sending JD to LLM for requirement extraction │ model=llama3
+2026-07-02 17:32:10.154 │ INFO     │ jd_parser:_extract_with_llm:90 │ LLM extracted │ role=Senior Machine Learning Engineer │ skills=7
+2026-07-02 17:32:10.155 │ INFO     │ pipeline:run:118 │ JD parsed │ role=Senior Machine Learning Engineer │ required_skills=7 │ exp=5.0-10.0 years
+2026-07-02 17:32:10.157 │ INFO     │ pipeline:run:128 │ Step 2/7 │ Parsing candidate data
+2026-07-02 17:32:10.160 │ INFO     │ pipeline:_load_candidates:264 │ Loading candidates from default directory: D:\New folder\REDROB-HACKATHON-PROJECT\data\candidates
+2026-07-02 17:32:10.161 │ INFO     │ candidate_parser:parse_file:51 │ Parsing candidate file │ path=sample_candidates.csv
+2026-07-02 17:32:10.161 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_candidates.csv │ format=.csv
+2026-07-02 17:32:10.205 │ INFO     │ candidate_parser:parse_file:68 │ Parsed 20 candidates from sample_candidates.csv
+2026-07-02 17:32:10.207 │ INFO     │ candidate_parser:parse_directory:100 │ Total candidates parsed from directory: 20
+2026-07-02 17:32:10.208 │ INFO     │ pipeline:run:131 │ Candidates loaded │ total=20
+2026-07-02 17:32:10.210 │ INFO     │ pipeline:run:139 │ Step 3/7 │ Generating embeddings and building FAISS index
+2026-07-02 17:32:27.275 │ INFO     │ embedding_service:_load_model:56 │ Loading primary embedding model: BAAI/bge-large-en-v1.5
+2026-07-02 17:33:29.957 │ INFO     │ logging:setup_logging:64 │ Logging initialized │ level=INFO │ file=D:\New folder\REDROB-HACKATHON-PROJECT\logs\ranking_system.log
+2026-07-02 17:33:29.957 │ INFO     │ run:main:110 │ Starting AI Smart Candidate Ranking System
+2026-07-02 17:33:29.957 │ INFO     │ run:main:111 │ Project root: D:\New folder\REDROB-HACKATHON-PROJECT
+2026-07-02 17:33:30.530 │ INFO     │ pipeline:__init__:71 │ RankingPipeline initialized
+2026-07-02 17:33:30.530 │ INFO     │ pipeline:run:107 │ ============================================================
+2026-07-02 17:33:30.530 │ INFO     │ pipeline:run:108 │ STARTING RANKING PIPELINE
+2026-07-02 17:33:30.532 │ INFO     │ pipeline:run:109 │ ============================================================
+2026-07-02 17:33:30.536 │ INFO     │ pipeline:run:114 │ Step 1/7 │ Parsing job description
+2026-07-02 17:33:30.538 │ INFO     │ pipeline:_load_job_description:254 │ Auto-detected JD file: D:\New folder\REDROB-HACKATHON-PROJECT\data\job_descriptions\sample_jd.txt
+2026-07-02 17:33:30.539 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_jd.txt │ format=.txt
+2026-07-02 17:33:30.540 │ INFO     │ jd_parser:parse:46 │ Parsing job description │ length=1453 chars
+2026-07-02 17:33:30.830 │ INFO     │ jd_parser:_extract_with_llm:68 │ Sending JD to LLM for requirement extraction │ model=llama3
+2026-07-02 17:34:20.702 │ INFO     │ jd_parser:_extract_with_llm:90 │ LLM extracted │ role=Senior Machine Learning Engineer │ skills=7
+2026-07-02 17:34:20.704 │ INFO     │ pipeline:run:118 │ JD parsed │ role=Senior Machine Learning Engineer │ required_skills=7 │ exp=5.0-10.0 years
+2026-07-02 17:34:20.708 │ INFO     │ pipeline:run:128 │ Step 2/7 │ Parsing candidate data
+2026-07-02 17:34:20.714 │ INFO     │ pipeline:_load_candidates:264 │ Loading candidates from default directory: D:\New folder\REDROB-HACKATHON-PROJECT\data\candidates
+2026-07-02 17:34:20.715 │ INFO     │ candidate_parser:parse_file:51 │ Parsing candidate file │ path=sample_candidates.csv
+2026-07-02 17:34:20.716 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_candidates.csv │ format=.csv
+2026-07-02 17:34:20.737 │ INFO     │ candidate_parser:parse_file:68 │ Parsed 20 candidates from sample_candidates.csv
+2026-07-02 17:34:20.738 │ INFO     │ candidate_parser:parse_directory:100 │ Total candidates parsed from directory: 20
+2026-07-02 17:34:20.741 │ INFO     │ pipeline:run:131 │ Candidates loaded │ total=20
+2026-07-02 17:34:20.745 │ INFO     │ pipeline:run:139 │ Step 3/7 │ Generating embeddings and building FAISS index
+2026-07-02 17:34:39.740 │ INFO     │ embedding_service:_load_model:56 │ Loading primary embedding model: all-MiniLM-L6-v2
+2026-07-02 17:34:59.806 │ INFO     │ embedding_service:_load_model:61 │ Primary model loaded │ model=all-MiniLM-L6-v2 │ dimension=384
+2026-07-02 17:34:59.807 │ INFO     │ semantic_ranker:build_index:34 │ Building FAISS index for 20 candidates
+2026-07-02 17:34:59.808 │ INFO     │ embedding_service:encode:111 │ Encoding 20 texts │ model=all-MiniLM-L6-v2
+2026-07-02 17:35:00.516 │ INFO     │ vector_store:build:79 │ FAISS index built │ vectors=20 │ dimension=384
+2026-07-02 17:35:00.517 │ INFO     │ semantic_ranker:build_index:46 │ FAISS index ready │ vectors=20
+2026-07-02 17:35:00.523 │ INFO     │ vector_store:save:143 │ FAISS index saved │ path=D:\New folder\REDROB-HACKATHON-PROJECT\vector_db\candidate_index.faiss │ vectors=20
+2026-07-02 17:35:00.526 │ INFO     │ pipeline:run:148 │ Step 4/7 │ Running semantic search (top 5)
+2026-07-02 17:35:00.528 │ INFO     │ semantic_ranker:search:64 │ Encoding JD query for semantic search │ top_k=5
+2026-07-02 17:35:00.624 │ INFO     │ vector_store:search:125 │ FAISS search │ top_k=5 │ results=5
+2026-07-02 17:35:00.625 │ INFO     │ semantic_ranker:search:71 │ Semantic search complete │ results=5 │ top_score=76.71 │ min_score=68.19
+2026-07-02 17:35:00.625 │ INFO     │ pipeline:run:153 │ Semantic search retrieved 5 candidates
+2026-07-02 17:35:00.627 │ INFO     │ pipeline:run:160 │ Step 5/7 │ LLM re-ranking (5 candidates)
+2026-07-02 17:35:00.639 │ INFO     │ llm_ranker:_check_availability:78 │ Ollama available │ model=llama3
+2026-07-02 17:35:00.640 │ INFO     │ llm_ranker:evaluate_batch:182 │ LLM batch evaluation │ candidates=5
+2026-07-02 17:35:35.820 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-001 │ score=85.6/100
+2026-07-02 17:36:11.157 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-003 │ score=61.3/100
+2026-07-02 17:36:42.202 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-010 │ score=38.8/100
+2026-07-02 17:37:47.277 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-016 │ score=62.5/100
+2026-07-02 17:38:19.516 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-011 │ score=78.8/100
+2026-07-02 17:50:47.568 │ INFO     │ logging:setup_logging:64 │ Logging initialized │ level=INFO │ file=D:\New folder\REDROB-HACKATHON-PROJECT\logs\ranking_system.log
+2026-07-02 17:50:47.569 │ INFO     │ run:main:110 │ Starting AI Smart Candidate Ranking System
+2026-07-02 17:50:47.569 │ INFO     │ run:main:111 │ Project root: D:\New folder\REDROB-HACKATHON-PROJECT
+2026-07-02 17:50:48.753 │ INFO     │ pipeline:__init__:71 │ RankingPipeline initialized
+2026-07-02 17:50:48.753 │ INFO     │ pipeline:run:107 │ ============================================================
+2026-07-02 17:50:48.753 │ INFO     │ pipeline:run:108 │ STARTING RANKING PIPELINE
+2026-07-02 17:50:48.755 │ INFO     │ pipeline:run:109 │ ============================================================
+2026-07-02 17:50:48.767 │ INFO     │ pipeline:run:114 │ Step 1/7 │ Parsing job description
+2026-07-02 17:50:48.769 │ INFO     │ pipeline:_load_job_description:254 │ Auto-detected JD file: D:\New folder\REDROB-HACKATHON-PROJECT\data\job_descriptions\sample_jd.txt
+2026-07-02 17:50:48.769 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_jd.txt │ format=.txt
+2026-07-02 17:50:48.771 │ INFO     │ jd_parser:parse:46 │ Parsing job description │ length=1453 chars
+2026-07-02 17:50:49.378 │ INFO     │ jd_parser:_extract_with_llm:68 │ Sending JD to LLM for requirement extraction │ model=llama3
+2026-07-02 17:52:21.926 │ INFO     │ jd_parser:_extract_with_llm:90 │ LLM extracted │ role=Senior Machine Learning Engineer │ skills=7
+2026-07-02 17:52:21.934 │ INFO     │ pipeline:run:118 │ JD parsed │ role=Senior Machine Learning Engineer │ required_skills=7 │ exp=5.0-10.0 years
+2026-07-02 17:52:21.942 │ INFO     │ pipeline:run:128 │ Step 2/7 │ Parsing candidate data
+2026-07-02 17:52:21.951 │ INFO     │ pipeline:_load_candidates:264 │ Loading candidates from default directory: D:\New folder\REDROB-HACKATHON-PROJECT\data\candidates
+2026-07-02 17:52:21.953 │ INFO     │ candidate_parser:parse_file:51 │ Parsing candidate file │ path=sample_candidates.csv
+2026-07-02 17:52:21.954 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_candidates.csv │ format=.csv
+2026-07-02 17:52:22.040 │ INFO     │ candidate_parser:parse_file:68 │ Parsed 20 candidates from sample_candidates.csv
+2026-07-02 17:52:22.040 │ INFO     │ candidate_parser:parse_directory:100 │ Total candidates parsed from directory: 20
+2026-07-02 17:52:22.042 │ INFO     │ pipeline:run:131 │ Candidates loaded │ total=20
+2026-07-02 17:52:22.044 │ INFO     │ pipeline:run:139 │ Step 3/7 │ Generating embeddings and building FAISS index
+2026-07-02 17:52:53.202 │ INFO     │ embedding_service:_load_model:56 │ Loading primary embedding model: all-MiniLM-L6-v2
+2026-07-02 17:53:00.395 │ INFO     │ embedding_service:_load_model:61 │ Primary model loaded │ model=all-MiniLM-L6-v2 │ dimension=384
+2026-07-02 17:53:00.409 │ INFO     │ semantic_ranker:build_index:34 │ Building FAISS index for 20 candidates
+2026-07-02 17:53:00.474 │ INFO     │ embedding_service:encode:111 │ Encoding 20 texts │ model=all-MiniLM-L6-v2
+2026-07-02 17:53:05.966 │ INFO     │ vector_store:build:79 │ FAISS index built │ vectors=20 │ dimension=384
+2026-07-02 17:53:05.969 │ INFO     │ semantic_ranker:build_index:46 │ FAISS index ready │ vectors=20
+2026-07-02 17:53:05.979 │ INFO     │ vector_store:save:143 │ FAISS index saved │ path=D:\New folder\REDROB-HACKATHON-PROJECT\vector_db\candidate_index.faiss │ vectors=20
+2026-07-02 17:53:05.987 │ INFO     │ pipeline:run:148 │ Step 4/7 │ Running semantic search (top 5)
+2026-07-02 17:53:05.992 │ INFO     │ semantic_ranker:search:64 │ Encoding JD query for semantic search │ top_k=5
+2026-07-02 17:53:06.678 │ INFO     │ vector_store:search:125 │ FAISS search │ top_k=5 │ results=5
+2026-07-02 17:53:06.680 │ INFO     │ semantic_ranker:search:71 │ Semantic search complete │ results=5 │ top_score=76.71 │ min_score=68.19
+2026-07-02 17:53:06.681 │ INFO     │ pipeline:run:153 │ Semantic search retrieved 5 candidates
+2026-07-02 17:53:06.685 │ INFO     │ pipeline:run:160 │ Step 5/7 │ LLM re-ranking (5 candidates)
+2026-07-02 17:53:07.024 │ INFO     │ llm_ranker:_check_availability:78 │ Ollama available │ model=llama3
+2026-07-02 17:53:07.025 │ INFO     │ llm_ranker:evaluate_batch:182 │ LLM batch evaluation │ candidates=5
+2026-07-02 17:54:10.108 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-001 │ score=85.0/100
+2026-07-02 17:54:41.346 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-003 │ score=61.3/100
+2026-07-02 17:55:12.631 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-010 │ score=51.2/100
+2026-07-02 17:56:13.383 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-016 │ score=62.5/100
+2026-07-02 17:56:43.472 │ INFO     │ llm_ranker:evaluate_candidate:150 │ LLM evaluated │ candidate=CAND-011 │ score=80.0/100
+2026-07-02 17:56:43.475 │ INFO     │ pipeline:run:176 │ Step 6/7 │ Computing hybrid scores
+2026-07-02 17:56:43.477 │ INFO     │ hybrid_scorer:compute_scores:63 │ Computing hybrid scores for 5 candidates
+2026-07-02 17:56:43.479 │ INFO     │ hybrid_scorer:compute_scores:132 │ Hybrid scoring complete │ top=Arjun Mehta (77.00) │ bottom=Lisa Zhang (62.82)
+2026-07-02 17:56:43.480 │ INFO     │ pipeline:run:185 │ Step 7/7 │ Exporting results
+2026-07-02 17:56:43.498 │ INFO     │ export_service:export_csv:63 │ CSV exported │ path=D:\New folder\REDROB-HACKATHON-PROJECT\data\output\ranked_candidates.csv │ rows=5
+2026-07-02 17:56:43.505 │ INFO     │ export_service:export_json:85 │ JSON exported │ path=D:\New folder\REDROB-HACKATHON-PROJECT\data\output\ranked_candidates.json
+2026-07-02 17:56:43.547 │ INFO     │ pipeline:run:208 │ ============================================================
+2026-07-02 17:56:43.547 │ INFO     │ pipeline:run:209 │ PIPELINE COMPLETE │ ranked 5 candidates
+2026-07-02 17:56:43.549 │ INFO     │ pipeline:run:210 │ ============================================================
+2026-07-02 17:56:45.705 │ INFO     │ main:lifespan:35 │ FastAPI starting up │ 0.0.0.0:8000
+2026-07-02 17:56:45.710 │ INFO     │ main:lifespan:38 │ FastAPI shutting down

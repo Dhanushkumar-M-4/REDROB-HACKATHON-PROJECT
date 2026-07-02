@@ -40,14 +40,14 @@ class Settings(BaseSettings):
         return self.project_root / "vector_db"
 
     # ── Embedding Configuration ────────────────────────────────────
-    primary_embedding_model: str = "BAAI/bge-large-en-v1.5"
+    primary_embedding_model: str = "all-MiniLM-L6-v2"
     fallback_embedding_model: str = "all-MiniLM-L6-v2"
     embedding_batch_size: int = 32
-    embedding_dimension: int = 1024  # bge-large dimension; 384 for MiniLM
+    embedding_dimension: int = 384  # bge-large dimension; 384 for MiniLM
 
     # ── FAISS Configuration ────────────────────────────────────────
     faiss_index_name: str = "candidate_index"
-    faiss_top_k: int = 30
+    faiss_top_k: int = 5
 
     # ── Ollama / LLM Configuration ─────────────────────────────────
     ollama_model: str = "llama3"

@@ -3,6 +3,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
@@ -59,6 +60,11 @@ def create_app() -> FastAPI:
 
     # Register routes
     app.include_router(router)
+    
+    # Mount frontend static files
+    import os
+    if os.path.exists("frontend"):
+        app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
     return app
 

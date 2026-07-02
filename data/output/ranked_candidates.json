@@ -1,0 +1,67 @@
+{
+  "job_role": "Senior Machine Learning Engineer",
+  "total_candidates": 5,
+  "ranked_candidates": [
+    {
+      "rank": 1,
+      "candidate_id": "CAND-001",
+      "candidate_name": "Arjun Mehta",
+      "semantic_score": 72.3,
+      "llm_score": 85.0,
+      "experience_score": 100.0,
+      "skill_score": 33.33,
+      "education_score": 85.0,
+      "final_score": 77.0,
+      "reason": "Top Strength: Proven track record in building production ML systems and leading teams. Main Gap: Limited experience with Spark or distributed computing, but has certifications in AWS and Google Professional ML Engineer."
+    },
+    {
+      "rank": 2,
+      "candidate_id": "CAND-011",
+      "candidate_name": "Omar Hassan",
+      "semantic_score": 68.19,
+      "llm_score": 80.0,
+      "experience_score": 100.0,
+      "skill_score": 29.17,
+      "education_score": 85.0,
+      "final_score": 73.44,
+      "reason": "Top Strength: Strong MLOps and model serving skills. Main Gap: Limited experience with PyTorch, but TensorFlow expertise is a plus."
+    },
+    {
+      "rank": 3,
+      "candidate_id": "CAND-016",
+      "candidate_name": "Nadia Ivanova",
+      "semantic_score": 76.71,
+      "llm_score": 62.5,
+      "experience_score": 100.0,
+      "skill_score": 33.33,
+      "education_score": 85.0,
+      "final_score": 72.02,
+      "reason": "Top Strength: MLOps expertise and hands-on experience with ML infrastructure. Main Gap: No direct leadership or mentoring experience, but has implemented governance framework."
+    },
+    {
+      "rank": 4,
+      "candidate_id": "CAND-003",
+      "candidate_name": "Michael Chen",
+      "semantic_score": 69.92,
+      "llm_score": 61.25,
+      "experience_score": 100.0,
+      "skill_score": 25.0,
+      "education_score": 100.0,
+      "final_score": 68.84,
+      "reason": "Top Strength: Strong technical skills match, especially with Spark and Airflow. Main Gap: Lack of direct ML/DL experience, but transferable data engineering expertise could be leveraged."
+    },
+    {
+      "rank": 5,
+      "candidate_id": "CAND-010",
+      "candidate_name": "Lisa Zhang",
+      "semantic_score": 68.2,
+      "llm_score": 51.25,
+      "experience_score": 100.0,
+      "skill_score": 16.67,
+      "education_score": 70.0,
+      "final_score": 62.82,
+      "reason": "Top Strength: Strong technical skills match, especially in cloud platforms and DevOps. Main Gap: Lack of direct ML experience and education; needs to demonstrate ability to learn and adapt."
+    }
+  ],
+  "output_file": "D:\\New folder\\REDROB-HACKATHON-PROJECT\\data\\output\\ranked_candidates.csv"
+}

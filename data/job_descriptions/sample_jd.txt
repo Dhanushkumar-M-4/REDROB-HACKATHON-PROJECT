@@ -1,0 +1,41 @@
+Senior Machine Learning Engineer
+
+About the Role:
+We are looking for a Senior Machine Learning Engineer to join our AI team. You will design, build, and deploy production-grade ML models that power our core products.
+
+Responsibilities:
+- Design and implement scalable ML pipelines for real-time inference
+- Lead model development from research to production deployment
+- Mentor junior engineers and conduct code reviews
+- Collaborate with product and data teams to define ML solutions
+- Optimize model performance, latency, and cost efficiency
+- Build and maintain monitoring and alerting for ML systems
+
+Required Skills:
+- Python (expert level)
+- TensorFlow or PyTorch
+- Machine Learning and Deep Learning
+- MLOps (model deployment, monitoring, CI/CD)
+- SQL and data processing (Pandas, NumPy)
+- Docker and Kubernetes
+- Cloud platforms (AWS or GCP)
+
+Preferred Skills:
+- NLP or Computer Vision experience
+- Spark or distributed computing
+- Leadership and mentoring experience
+- FastAPI or Flask for model serving
+- Airflow for workflow orchestration
+
+Experience:
+- 5-10 years of professional software engineering experience
+- At least 3 years focused on Machine Learning
+
+Education:
+- Master's or Ph.D. in Computer Science, Machine Learning, or related field
+
+Soft Skills:
+- Strong communication and presentation skills
+- Leadership and team collaboration
+- Problem solving and critical thinking
+- Adaptability and willingness to learn new technologies

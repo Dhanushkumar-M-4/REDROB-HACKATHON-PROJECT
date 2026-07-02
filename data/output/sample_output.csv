@@ -1,0 +1,6 @@
+Rank,Candidate ID,Candidate Name,Semantic Score,LLM Score,Experience Score,Skill Score,Education Score,Final Score,Reason
+1,CAND-001,Arjun Mehta,95.2,91.0,88.0,92.5,85.0,92.15,"Strong ML background with production experience in TensorFlow, PyTorch, and MLOps. 7 years of relevant experience aligns perfectly with requirements."
+2,CAND-008,Ananya Patel,93.8,89.5,94.0,90.0,100.0,92.05,"Principal NLP Research Scientist with 9 years and Ph.D. Exceptional skills match with deep learning and NLP expertise."
+3,CAND-020,Yuki Tanaka,91.5,87.0,88.0,88.5,100.0,89.73,"Senior NLP Researcher with Ph.D. and 7 years. Strong production ML experience with transformers and MLOps."
+4,CAND-011,Omar Hassan,88.2,82.0,76.0,85.0,85.0,84.73,"ML Engineer with 5 years of production AI experience. Strong in MLOps and model serving with FastAPI."
+5,CAND-016,Nadia Ivanova,86.5,80.0,76.0,82.0,85.0,82.95,"MLOps specialist with 5 years. Strong infrastructure skills but less focus on model development."

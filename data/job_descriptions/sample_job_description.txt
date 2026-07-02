@@ -1,0 +1,62 @@
+Senior Machine Learning Engineer
+
+Company: TechVision AI
+Location: Bangalore, India (Hybrid)
+Department: AI & Machine Learning
+
+About the Role:
+We are looking for a Senior Machine Learning Engineer to join our growing AI team. You will design, develop, and deploy production-grade machine learning models that power our core products. This role requires deep expertise in ML, strong software engineering skills, and the ability to lead technical initiatives.
+
+Responsibilities:
+- Design and implement end-to-end ML pipelines from data preprocessing to model deployment
+- Build and optimize deep learning models for NLP, computer vision, or recommendation systems
+- Deploy models to production using containerized microservices architecture
+- Implement MLOps best practices including CI/CD for ML, model monitoring, and A/B testing
+- Collaborate with product managers and stakeholders to translate business requirements into ML solutions
+- Mentor junior engineers and conduct code reviews
+- Stay current with latest ML research and evaluate new techniques for production applicability
+- Contribute to the development of our internal ML platform and tooling
+
+Required Skills:
+- Python (expert level)
+- TensorFlow or PyTorch (production experience required)
+- Scikit-learn and traditional ML algorithms
+- MLOps tools (MLflow, Airflow, or Kubeflow)
+- Docker and Kubernetes for model serving
+- SQL and data processing (Pandas, NumPy)
+- AWS or GCP cloud services
+- Git and CI/CD practices
+- REST API development (FastAPI or Flask)
+- Linux command line proficiency
+
+Preferred Skills:
+- NLP or Computer Vision specialization
+- Spark or distributed computing
+- Terraform for infrastructure management
+- Experience with LLMs and Generative AI
+- Hugging Face Transformers
+- Model optimization (quantization, distillation, pruning)
+- Technical blog writing or conference presentations
+
+Experience:
+- 5-10 years of professional experience in software engineering or ML
+- At least 3 years of hands-on ML/AI experience
+- Experience deploying ML models to production at scale
+
+Education:
+- Master's or Ph.D. in Computer Science, Machine Learning, Statistics, or related field
+- Bachelor's degree with exceptional experience will also be considered
+
+Soft Skills:
+- Strong communication and presentation skills
+- Leadership and mentoring ability
+- Problem-solving mindset
+- Ability to work in cross-functional teams
+- Adaptability to rapidly changing requirements
+
+What We Offer:
+- Competitive salary and equity
+- Flexible hybrid work arrangement
+- Annual conference budget
+- Learning and development stipend
+- Health and wellness benefits

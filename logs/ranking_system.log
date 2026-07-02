@@ -1,0 +1,24 @@
+2026-07-02 15:45:54.461 │ INFO     │ logging:setup_logging:64 │ Logging initialized │ level=INFO │ file=C:\Users\kit23\OneDrive\Desktop\HACKTHAN\candidate-ranking\logs\ranking_system.log
+2026-07-02 15:45:54.462 │ INFO     │ run:main:110 │ Starting AI Smart Candidate Ranking System
+2026-07-02 15:45:54.462 │ INFO     │ run:main:111 │ Project root: C:\Users\kit23\OneDrive\Desktop\HACKTHAN\candidate-ranking
+2026-07-02 15:46:01.203 │ INFO     │ pipeline:__init__:71 │ RankingPipeline initialized
+2026-07-02 15:46:01.203 │ INFO     │ pipeline:run:107 │ ============================================================
+2026-07-02 15:46:01.204 │ INFO     │ pipeline:run:108 │ STARTING RANKING PIPELINE
+2026-07-02 15:46:01.204 │ INFO     │ pipeline:run:109 │ ============================================================
+2026-07-02 15:46:01.292 │ INFO     │ pipeline:run:114 │ Step 1/7 │ Parsing job description
+2026-07-02 15:46:01.293 │ INFO     │ pipeline:_load_job_description:254 │ Auto-detected JD file: C:\Users\kit23\OneDrive\Desktop\HACKTHAN\candidate-ranking\data\job_descriptions\sample_jd.txt
+2026-07-02 15:46:01.294 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_jd.txt │ format=.txt
+2026-07-02 15:46:01.295 │ INFO     │ jd_parser:parse:46 │ Parsing job description │ length=1453 chars
+2026-07-02 15:46:01.296 │ WARNING  │ jd_parser:_extract_with_llm:94 │ Ollama package not installed
+2026-07-02 15:46:01.296 │ WARNING  │ jd_parser:parse:51 │ LLM extraction failed, using fallback regex parser
+2026-07-02 15:46:01.297 │ INFO     │ jd_parser:_extract_with_regex:102 │ Using regex fallback for JD parsing
+2026-07-02 15:46:01.300 │ INFO     │ pipeline:run:118 │ JD parsed │ role=We are looking for a Senior Machine Learning Engineer to join our AI team. You will design, build, a │ required_skills=20 │ exp=3.0-10.0 years
+2026-07-02 15:46:01.302 │ INFO     │ pipeline:run:128 │ Step 2/7 │ Parsing candidate data
+2026-07-02 15:46:01.303 │ INFO     │ pipeline:_load_candidates:264 │ Loading candidates from default directory: C:\Users\kit23\OneDrive\Desktop\HACKTHAN\candidate-ranking\data\candidates
+2026-07-02 15:46:01.304 │ INFO     │ candidate_parser:parse_file:51 │ Parsing candidate file │ path=sample_candidates.csv
+2026-07-02 15:46:01.304 │ INFO     │ file_loader:load:41 │ Loading file │ path=sample_candidates.csv │ format=.csv
+2026-07-02 15:46:01.334 │ INFO     │ candidate_parser:parse_file:68 │ Parsed 20 candidates from sample_candidates.csv
+2026-07-02 15:46:01.335 │ INFO     │ candidate_parser:parse_directory:100 │ Total candidates parsed from directory: 20
+2026-07-02 15:46:01.335 │ INFO     │ pipeline:run:131 │ Candidates loaded │ total=20
+2026-07-02 15:46:01.336 │ INFO     │ pipeline:run:139 │ Step 3/7 │ Generating embeddings and building FAISS index
+2026-07-02 15:46:58.128 │ INFO     │ embedding_service:_load_model:56 │ Loading primary embedding model: BAAI/bge-large-en-v1.5
